@@ -85,7 +85,7 @@ class DoubleFlutterActivity : FragmentActivity(), EngineBindingsDelegate {
     }
 
     override fun onNext() {
-        val flutterIntent = Intent(this, MainActivity::class.java)
+        val flutterIntent = Intent(this, SingleFlutterActivity::class.java)
         startActivity(flutterIntent)
     }
 }

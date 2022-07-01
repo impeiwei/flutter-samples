@@ -15,7 +15,7 @@ void topMain() => runApp(const MyApp(color: Colors.green));
 void bottomMain() => runApp(const MyApp(color: Colors.purple));
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key, required this.color});
+  const MyApp({required this.color});
 
   final MaterialColor color;
 
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({required this.title});
   final String title;
 
   @override
@@ -74,6 +74,21 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Image.asset(
+                  'images/ic_launcher.png',
+                  height: 100,
+                  width: 100,
+                ),
+                Image.network(
+                  'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png',
+                  height: 100,
+                  width: 100,
+                ),
+              ],
+            ),
             const Text(
               'You have pushed the button this many times:',
             ),
