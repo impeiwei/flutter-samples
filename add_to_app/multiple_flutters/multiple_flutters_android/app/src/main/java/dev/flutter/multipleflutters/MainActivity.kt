@@ -43,8 +43,8 @@ class MainActivity : AppCompatActivity(), DataModelObserver {
 
     /** Event from `activity_main.xml`. */
     fun onClickNext(view: View) {
-        val nextClass =
-            if (mainActivityIdentifier % 2 == 0) SingleFlutterActivity::class.java else DoubleFlutterActivity::class.java
+        val nextClass = DoubleFlutterActivity::class.java
+//            if (mainActivityIdentifier % 2 == 0) SingleFlutterActivity::class.java else DoubleFlutterActivity::class.java
         val flutterIntent = Intent(this, nextClass)
         startActivity(flutterIntent)
     }
