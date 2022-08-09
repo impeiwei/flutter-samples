@@ -14,5 +14,6 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         engines = FlutterEngineGroup(this)
+        io.flutter.Log.setLogLevel(0)
     }
 }

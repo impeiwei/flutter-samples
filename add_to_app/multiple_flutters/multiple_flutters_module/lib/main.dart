@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart' as launcher;
@@ -39,13 +40,14 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   int? _counter = 0;
   late MethodChannel _channel;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _channel = const MethodChannel('multiple-flutters');
     _channel.setMethodCallHandler((call) async {
       if (call.method == "setCount") {
@@ -57,6 +59,18 @@ class _MyHomePageState extends State<MyHomePage> {
         throw Exception('not implemented ${call.method}');
       }
     });
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    print('MFM (kDebugMode: $kDebugMode) didChangeAppLifecycleState : $state');
   }
 
   void _incrementCounter() {
@@ -90,6 +104,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 _channel.invokeMethod<void>("next", _counter);
               },
               child: const Text('Next'),
+            ),
+            const TextField(
+              autofocus: true,
             ),
             ElevatedButton(
               onPressed: () async {
